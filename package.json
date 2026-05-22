@@ -1,0 +1,11 @@
+{
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --watch",
+        "prod": "tailwindcss -i ./resources/css/app.css -o ./public/css/app.css --minify"
+    },
+    "devDependencies": {
+        "tailwindcss": "^3.4.0"
+    }
+}

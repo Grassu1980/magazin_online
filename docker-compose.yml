@@ -1,0 +1,35 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: magazin_online_app
+    volumes:
+      - ./:/var/www/html
+    working_dir: /var/www/html
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+    env_file:
+      - .env.docker
+    command: php artisan serve --host=0.0.0.0 --port=8000
+
+  db:
+    image: mysql:8.0
+    container_name: magazin_online_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: magazin_online
+      MYSQL_USER: root
+      MYSQL_PASSWORD: root
+    ports:
+      - '3306:3306'
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:
